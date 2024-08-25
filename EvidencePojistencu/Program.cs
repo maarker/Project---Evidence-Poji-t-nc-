@@ -1,10 +1,14 @@
-﻿namespace EvidencePojistencu
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace ProjektEvidencePojistencu
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            HUD hud = new HUD();
+
+            hud.VytvorHUD();
         }
     }
 }
