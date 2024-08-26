@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EvidencePojistencu;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,50 +10,36 @@ namespace ProjektEvidencePojistencu
     internal class Databaze
     {
         public List<Pojistenec> pojistenci = new List<Pojistenec>();
-
+        UzivatelskeRozhrani ui = new UzivatelskeRozhrani();
+        /// <summary>
+        /// Po zadání potřebných parametrů pro vytvoření instance Pojistenec, tuto instanci přidá do databáze
+        /// </summary>
         public void PridejPojistence()
         {
-            string jmeno = "";
-            string prijmeni = "";
-            int telCislo = 0;
-            int vek = 0;
-
-            Console.WriteLine("Zadejte jméno pojisteného:");
-            jmeno = Console.ReadLine();
-
-            Console.WriteLine("Zadejte príjmení:");
-            prijmeni = Console.ReadLine();
-
-            Console.WriteLine("Zadejte vek:");
-            vek = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Zadejte telefonní císlo:");
-            string telCisloString = Console.ReadLine();
-            string[] telCisloStrings = telCisloString.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            telCisloString = string.Join("", telCisloStrings);
-            telCislo = int.Parse(telCisloString.Trim());
-
-            Pojistenec pojistenec = new Pojistenec(jmeno, prijmeni, vek, telCislo);
-
+            Pojistenec pojistenec = new Pojistenec(ui.ZadejJmenoPojistence(),
+                                                   ui.ZadejPrijmeniPojistence(),
+                                                    ui.ZadejVekPojistence(),
+                                                    ui.ZadejTelCisloPojistence());
             pojistenci.Add(pojistenec);
-            Console.WriteLine("Data byla ulozena. Pokracujte libovolnou klávesou...");
         }
 
-        public void VypisVsechny()
+        /// <summary>
+        /// Vypíše všechny zapsané pojištěnce
+        /// </summary>
+        public void VypisVsechnyPojistence()
         {
             foreach (Pojistenec pojistenec in pojistenci)
             {
-                Console.WriteLine(pojistenec);
+                ui.VypisPojistence(pojistenec);
             }
         }
-
-
+        /// <summary>
+        /// Po zadání jména a příjmení hledaného pojištěnce vrátí záznamy podle výsledků
+        /// </summary>
         public void VyhledejPojistence()
         {
-            Console.WriteLine("Zadejte jméno pojisteného:");
-            string hledaniJmena = Console.ReadLine();
-            Console.WriteLine("Zadejte prijmení:");
-            string hledaniPrijmeni = Console.ReadLine();
+            string hledaniJmena = ui.ZadejJmenoPojistence();
+            string hledaniPrijmeni = ui.ZadejPrijmeniPojistence();
 
 
             List<Pojistenec> nalezeniPojistenci = new List<Pojistenec>();
@@ -60,7 +47,7 @@ namespace ProjektEvidencePojistencu
 
             foreach (Pojistenec pojistenec in pojistenci)
             {
-                if (pojistenec.Jmeno.Equals(hledaniJmena) && pojistenec.Prijmeni.Equals(hledaniPrijmeni))
+                if (pojistenec.Jmeno.ToLower().Equals(hledaniJmena.ToLower()) && pojistenec.Prijmeni.ToLower().Equals(hledaniPrijmeni.ToLower()))
                 {
                     nalezeniPojistenci.Add(pojistenec);
                     nalezen = true;
@@ -70,7 +57,7 @@ namespace ProjektEvidencePojistencu
             {
                 foreach (Pojistenec nalezenyPojistenec in nalezeniPojistenci)
                 {
-                    Console.WriteLine($"\n{nalezenyPojistenec}");
+                    ui.VypisPojistence(nalezenyPojistenec);
                 }
             }
             else
