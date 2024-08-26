@@ -9,7 +9,6 @@ namespace ProjektEvidencePojistencu
         {
             UzivatelskeRozhrani ui = new UzivatelskeRozhrani();
             Databaze databaze = new Databaze();
-            Editor editor = new Editor();
             Menu menu = new Menu();
 
             bool pokracovat = true;
