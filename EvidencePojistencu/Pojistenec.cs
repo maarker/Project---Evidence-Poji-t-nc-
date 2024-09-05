@@ -26,15 +26,9 @@ namespace ProjektEvidencePojistencu
 
         public override string ToString()
         {
-            string JmenoPrvniPismeno = Jmeno.Substring(0, 1).ToUpper();
-            string JmenoZbytek = Jmeno.Substring(1, Jmeno.Length - 1);
-            Jmeno = JmenoPrvniPismeno + JmenoZbytek;
-
-            string PrijmeniPrvniPismeno = Prijmeni.Substring(0, 1).ToUpper();
-            string PrijmeniZbytek = Prijmeni.Substring(1, Prijmeni.Length - 1);
-            Prijmeni = PrijmeniPrvniPismeno + PrijmeniZbytek;
-
-            return $"{Jmeno}\t{Prijmeni}\t{Vek}\t{TelCislo}";
+            string JmenoSVelkym = Jmeno.Length == 0 ? "" : Char.ToUpper(Jmeno[0]) + Jmeno.Substring(1);
+            string PrijmeniSVelkym = Prijmeni.Length == 0 ? "" : Char.ToUpper(Prijmeni[0]) + Prijmeni.Substring(1);
+            return $"{JmenoSVelkym}\t{PrijmeniSVelkym}\t{Vek}\t{TelCislo}";
         }
     }
 }
