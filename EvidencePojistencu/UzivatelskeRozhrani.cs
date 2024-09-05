@@ -86,33 +86,46 @@ namespace EvidencePojistencu
         /// Výzva pro zadání TELEFONNÍHO ČÍSLA pojištěnce
         /// </summary>
         /// <returns></returns>
-        public int ZadejTelCisloPojistence()
+        public string ZadejTelCisloPojistence()
         {
-            int telCislo;
             Console.WriteLine("\nZadejte telefonní číslo:");
             string telCisloString = Console.ReadLine();
             string[] telCisloStrings = telCisloString.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             telCisloString = string.Join("", telCisloStrings);
+            bool spravneCislo = false;
 
-            telCislo = int.Parse(telCisloString.Trim());
-
-            if(!int.TryParse(telCisloString.Trim(), out telCislo))
+            while (!spravneCislo)
             {
-                Console.WriteLine("Neplatný výraz, zadejte prosím telefonní číslo. (bez předčíslí)");
+                foreach (char znak in telCisloString)
+                {
+                    if (telCisloString.StartsWith('+') || char.IsDigit(znak))
+                    {
+                        spravneCislo = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Neplatné číslo. Zadejte prosím správnou formu (např. +420 421 284 754)");
+                        telCisloString = Console.ReadLine();
+                        telCisloStrings = telCisloString.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                        telCisloString = string.Join("", telCisloStrings);
+
+                        spravneCislo = false;
+                    }
+                } 
             }
 
-            return telCislo;
+            return telCisloString;
         }
         /// <summary>
         /// Výzva pro zadání data pojištěnce !!! NEPOUŽITO !!!
         /// </summary>
         /// <returns>string Jméno, string Příjmení, int věk a int telefonní číslo </returns>
-        public (string jmeno, string prijmeni, int vek, int telCislo) ZadejDataPojistence()
+        public (string jmeno, string prijmeni, int vek, string telCislo) ZadejDataPojistence()
         {
             string jmeno = "";
             string prijmeni = "";
             int vek = 0;
-            int telCislo = 0;
+            string telCislo = "";
 
             jmeno = ZadejJmenoPojistence();
             prijmeni = ZadejPrijmeniPojistence();

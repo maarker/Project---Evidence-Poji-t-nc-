@@ -13,9 +13,9 @@ namespace ProjektEvidencePojistencu
         public string Prijmeni { get; private set; }
         public string CeleJmeno { get { return Jmeno + " " + Prijmeni; }}
         public int Vek { get; private set; }
-        public int TelCislo { get; private set; }
+        public string TelCislo { get; private set; }
 
-        public Pojistenec(string jmeno, string prijmeni, int vek, int telCislo)
+        public Pojistenec(string jmeno, string prijmeni, int vek, string telCislo)
         {
             this.Jmeno = jmeno;
             this.Prijmeni = prijmeni;
