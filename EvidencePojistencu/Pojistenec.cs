@@ -15,12 +15,12 @@ namespace ProjektEvidencePojistencu
         public int Vek { get; private set; }
         public string TelCislo { get; private set; }
 
-        public Pojistenec(string jmeno, string prijmeni, int vek, string telCislo)
+        public Pojistenec(string jmeno, string prijmeni, string telCislo, int vek)
         {
             this.Jmeno = jmeno;
             this.Prijmeni = prijmeni;
-            this.Vek = vek;
             this.TelCislo = telCislo;
+            this.Vek = vek;
         }
 
 

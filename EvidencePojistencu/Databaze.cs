@@ -18,8 +18,8 @@ namespace ProjektEvidencePojistencu
         {
             Pojistenec pojistenec = new Pojistenec(ui.ZadejJmenoPojistence(),
                                                    ui.ZadejPrijmeniPojistence(),
-                                                    ui.ZadejVekPojistence(),
-                                                    ui.ZadejTelCisloPojistence());
+                                                    ui.ZadejTelCisloPojistence(),
+                                                    ui.ZadejVekPojistence());
             pojistenci.Add(pojistenec);
         }
 
