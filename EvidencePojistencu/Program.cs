@@ -34,7 +34,7 @@ namespace ProjektEvidencePojistencu
                         ui.Pokracuj();
                         break;
                     case 4:
-                        pokracovat = false;
+                        pokracovat = false; // přeruší cyklus a ukončí program
                         break;
                 }
             }

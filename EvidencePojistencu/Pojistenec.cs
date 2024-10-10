@@ -24,7 +24,7 @@ namespace ProjektEvidencePojistencu
         }
 
 
-        public override string ToString()
+        public override string ToString() // přepsání metody pro zobrazení instance tak, jak chceme
         {
             string JmenoSVelkym = Jmeno.Length == 0 ? "" : Char.ToUpper(Jmeno[0]) + Jmeno.Substring(1);
             string PrijmeniSVelkym = Prijmeni.Length == 0 ? "" : Char.ToUpper(Prijmeni[0]) + Prijmeni.Substring(1);

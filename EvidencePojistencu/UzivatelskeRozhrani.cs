@@ -14,31 +14,32 @@ namespace EvidencePojistencu
         /// <returns></returns>
         public int ZadejVolbu()
         {
-                            bool volbaValid = false;
-                int volba = 0;
+            bool volbaValid = false;
+            int volba = 0;
 
-                while (!volbaValid)
+            while (!volbaValid)
+            {
+                string zvolenaMoznost = Console.ReadKey().KeyChar.ToString();
+
+                if (int.TryParse(zvolenaMoznost, out volba))
                 {
-                    string zvolenaMoznost = Console.ReadKey().KeyChar.ToString();
-
-                    if (int.TryParse(zvolenaMoznost, out volba))
+                    if (volba >= 1 && volba <= 4)
                     {
-                        if (volba >= 1 && volba <= 4)
-                        {
-                            volbaValid = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("\nNeplatná možnost. Zadejte prosím 1 až 4.");
-                            volbaValid = false;
-                        }
+                        volbaValid = true;
                     }
                     else
                     {
+                        // Ověření vstupu
                         Console.WriteLine("\nNeplatná možnost. Zadejte prosím 1 až 4.");
+                        volbaValid = false;
                     }
                 }
-        return volba;
+                else
+                {
+                    Console.WriteLine("\nNeplatná možnost. Zadejte prosím 1 až 4.");
+                }
+            }
+            return volba;
         }
         /// <summary>
         /// Vypíše výzvu pro pokračování libovolnou klávesou
@@ -55,7 +56,23 @@ namespace EvidencePojistencu
         public string ZadejJmenoPojistence()
         {
             Console.WriteLine("\nZadejte jméno pojištěného:");
-            string jmeno = Console.ReadLine().ToLower().Trim();
+            string jmeno = "";
+            bool spravneZadaneJmeno = false;
+
+            // ověření, zda je jméno správně vyplněno
+            while (!spravneZadaneJmeno)
+            {
+                jmeno = Console.ReadLine().ToLower().Trim();
+                if (jmeno != "")
+                {
+                    spravneZadaneJmeno = true;
+                }
+                else
+                {
+                    Console.WriteLine("Jméno nesmí být prázdné, vyplňte požadatek prosím");
+                }
+
+            }
             return jmeno;
         }
         /// <summary>
@@ -65,7 +82,22 @@ namespace EvidencePojistencu
         public string ZadejPrijmeniPojistence()
         {
             Console.WriteLine("\nZadejte příjmení pojištěného:");
-            string prijmeni = Console.ReadLine().ToLower().Trim();
+            string prijmeni = "";
+            bool spravneZadanePrijmeni = false;
+
+            // ověření, zda je příjmení správně vyplněno
+            while (!spravneZadanePrijmeni)
+            {
+                prijmeni = Console.ReadLine().ToLower().Trim();
+                if (prijmeni != "")
+                {
+                    spravneZadanePrijmeni = true;
+                }
+                else
+                {
+                    Console.WriteLine("Příjmení nesmí být prázdné, vyplňte požadatek prosím");
+                }
+            }
             return prijmeni;
         }
         /// <summary>
@@ -76,7 +108,7 @@ namespace EvidencePojistencu
         {
             int vek;
             Console.WriteLine("\nZadejte věk pojištěného:");
-            while(!int.TryParse(Console.ReadLine(), out vek))
+            while (!int.TryParse(Console.ReadLine(), out vek))
             {
                 Console.WriteLine("Naplatný výraz, zadejte prosím číslicovou formu věku");
             }
@@ -98,6 +130,7 @@ namespace EvidencePojistencu
             {
                 foreach (char znak in telCisloString)
                 {
+                    // ověření vstupu od uživatele
                     if (telCisloString.StartsWith('+') || char.IsDigit(znak))
                     {
                         spravneCislo = true;
@@ -111,7 +144,7 @@ namespace EvidencePojistencu
 
                         spravneCislo = false;
                     }
-                } 
+                }
             }
 
             return telCisloString;
